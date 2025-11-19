@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills - Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .page-wrapper {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding-top: 80px;
+        }
+
+        .skills-banner {
+            position: relative;
+            padding: 6rem 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+
+        .skills-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 50%);
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .banner-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .banner-content p {
+            font-size: 1.2rem;
+            color: var(--muted-color);
+            margin-bottom: 2rem;
+        }
+
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .skill-group {
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .skill-group:nth-child(2) { animation-delay: 0.2s; }
+        .skill-group:nth-child(3) { animation-delay: 0.4s; }
+
+        .group-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .group-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--highlight-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transform: rotate(-10deg);
+        }
+
+        .group-title {
+            font-size: 2rem;
+            color: var(--light-color);
+            margin: 0;
+        }
+
+        /* New Skills Layout */
+        .skills-container {
+            padding: 4rem 0;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--gradient-glass);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            backdrop-filter: var(--blur-effect);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .skill-card:hover {
+            transform: translateX(10px);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .skill-content {
+            flex: 1;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skill-title {
+            font-size: 1.5rem;
+            color: var(--light-color);
+            margin: 0;
+        }
+
+        .skill-level {
+            color: var(--highlight-color);
+            font-weight: 500;
+        }
+
+        .skill-description {
+            color: var(--muted-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .skill-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--highlight-color);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .skill-title {
+            font-size: 1.5rem;
+            color: var(--light-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-meter {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--highlight-color);
+            border-radius: 2px;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        .skill-details {
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            color: var(--muted-color);
+            font-size: 0.9rem;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--highlight-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .banner-content h1 {
+                font-size: 2.5rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .group-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .group-icon {
+                margin: 0 0 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Muqadas Zainab</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="section-title">My Skills</h1>
+        
+        <div class="skills-grid">
+            <div class="glass-card skill-card">
+                <h3>Software Skills</h3>
+                <ul class="skill-list">
+                    <li>Pyton</li>
+                    <li>Frontend Developer</li>
+                    <li>CSS,HTML,JAVASCRIPT</li>
+                    <li>BootStrap</li>
+
+                    <li>MS Word</li>
+                    <li>Excel</li>
+                    <li>PowerPoint</li>
+                    <li>Power Query</li>
+                    <li>Dashboards</li>
+                </ul>
+            </div>
+
+            <div class="glass-card skill-card">
+                <h3>Mathematical Skills</h3>
+                <ul class="skill-list">
+                    <li>Analytical Thinking</li>
+                    <li>Problem Solving</li>
+                    <li>Statistical Analysis</li>
+                    <li>Data Interpretation</li>
+                    <li>Calculus
+
+                    </li>
+                    <li>Algebra</li>
+                </ul>
+            </div>
+
+            <div class="glass-card skill-card">
+                <h3>Communication Skills</h3>
+                <ul class="skill-list">
+                    <li>Written Communication</li>
+                    <li>Verbal Communication</li>
+                    <li>Presentation Skills</li>
+                    <li>Team Collaboration</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

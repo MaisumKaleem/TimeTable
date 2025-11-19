@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Muqadas Zainab</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .about-header {
+            position: relative;
+            padding: 6rem 0 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+        }
+
+        .about-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(233, 69, 96, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(15, 52, 96, 0.15), transparent);
+        }
+
+        .about-header h1 {
+            position: relative;
+            color: var(--light-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-header p {
+            position: relative;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--highlight-color);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--highlight-color);
+        }
+
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .interest-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .interest-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .language-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .language-level {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .level-bar {
+            height: 100%;
+            background: var(--highlight-color);
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .about-header {
+                padding: 4rem 1rem 2rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Muqadas Zainab</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="about-header">
+        <h1>About Me</h1>
+        <p>A passionate mathematician with a creative mindset and a dedication to continuous learning</p>
+    </header>
+
+    <div class="container">
+        <div class="about-grid">
+            <div class="glass-card">
+                <h2>Educational Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>BS Mathematics</h3>
+                        <p>Bahauddin Zakriya University</p>
+                        <p><strong>CGPA:</strong> 3.62/4.00</p>
+                        <p><strong>Duration:</strong> 2020-2024</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h2>Languages</h2>
+                <div class="language-card">
+                    <span>English</span>
+                    <div class="language-level">
+                        <div class="level-bar" style="width: 70%"></div>
+                    </div>
+                </div>
+                <div class="language-card">
+                    <span>Urdu</span>
+                    <div class="language-level">
+                        <div class="level-bar" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h2>Interests & Activities</h2>
+            <div class="interest-grid">
+                <div class="interest-item">
+                    <h3>Reading</h3>
+                    <p>Islamic and Motivational Books</p>
+                </div>
+                <div class="interest-item">
+                    <h3>Technology</h3>
+                    <p>Excel and Computer Tools</p>
+                </div>
+                <div class="interest-item">
+                    <h3>Art</h3>
+                    <p>Sketching and Artwork</p>
+                </div>
+                <div class="interest-item">
+                    <h3>Teaching</h3>
+                    <p>Helping Others Study</p>
+                </div>
+                <div class="interest-item">
+                    <h3>Music</h3>
+                    <p>Listening to Soft Nasheeds</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

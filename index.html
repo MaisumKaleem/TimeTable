@@ -1,278 +1,86 @@
-<!-- boiloplate code -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  </head>
-  <body>
-    <div class="main">
-      <div class="navbar">
-        <nav>
-          <img src="./images/portfolio.png" alt width="170px">
-          <ul class="navitem">
-            <li><a href="./index.html" id="home"><i
-                  class="fa-solid fa-house"></i> Home</a></li>
-            <li> <a href="#skills"><i class="fa-solid fa-user"></i>
-                Skills</a></li>
-            <li><a href="#Projects"><i class="fa-solid fa-database"></i>
-                Projects</a></li>
-            <li><a href="#Contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
-            
-             <button id="togglebtn"><i class="fa-solid fa-phone"></i></button>
-          </ul>
-         
-        </nav>
-      </div>
-
-      <div class="frontview">
-
-        <div class="content">
-          <p id="hello">Hi, I'm</p>
-          <h2 id="name">Muqadas Zainab</h2>
-          <p id="profession">A Front-End Developer & Web Designer</p>
-          <p id="subj">HTML | CSS | Javascript | Bootstrap | React.js</p>
-         <a href="#Contact"> <button id="hire"><i class="fa-brands fa-hire-a-helper"></i> Hire Me
-          </button></a>
-          <a href="#Projects"><button id="project"><i class="fa-solid fa-diagram-project"></i> My
-            Projects </button></a>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muqadas Zainab - Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Muqadas Zainab</a>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="about.html"><i class="fas fa-user"></i> About</a>
+                <a href="skills.html"><i class="fas fa-code"></i> Skills</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
         </div>
-        <div class="frontpic">
-          <img
-            src="./images/hijab pic.png"
-            alt width="60%">
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text-wrapper">
+                <div class="hero-intro"><i class="fas fa-star"></i> Welcome to my world of analytics</div>
+                <h1 class="hero-title">Transforming Numbers into <span class="highlight">Insights</span></h1>
+                <p class="hero-description"><i class="fas fa-quote-left"></i> Hello, I'm <strong>Muqadas Zainab</strong>, a Mathematics graduate passionate about solving complex problems and creating data-driven solutions.</p>
+                <div class="hero-buttons">
+                    <a href="about.html" class="btn btn-primary"><i class="fas fa-compass"></i> Discover My Work</a>
+                    <a href="contact.html" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Let's Connect</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8bWF0aGVtYXRpY3N8fHx8fHwxNjMwNTAwMDAwMA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=600" 
+                     alt="Mathematical visualization" class="hero-image">
+                <div class="hero-image-bg"></div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div id="skills">
-        <center><h2 id="skillhead">Skills:</h2>
-        </center>
-        <div class="line"></div>
-        <div class="skillcontent">
-          <div class="skillcard">
-            <center><img src="./images/phyton icon images.png" alt
-                width="74px"></center>
-            <h1 class="phyton">Phyton</h1>
-          </div>
-
-          <div class="skillcard">
-            <center><img src="./images/microsoft-removebg-preview.png" alt
-                width="110px"></center>
-            <h1 class="micro">Microsoft Office</h1>
-          </div>
-
-          <div class="skillcard">
-            <center><img src="./images/art.png" alt width="80px">
-              <h1 class="sketch">Sketching & Art</h1>
+    <div class="container">
+        <div class="vision-section">
+            <div class="glass-card career-card">
+                <div class="card-icon">🎯</div>
+                <h2>Career Vision</h2>
+                <p>To obtain a challenging position in a reputable organization where I can apply my mathematical and analytical skills and contribute to professional growth.</p>
+                <div class="card-decoration"></div>
             </div>
-            <div class="skillcard">
-              <center><img src="./images/css pic.png" alt width="77px"></center>
-              <h1 class="css">CSS Coding</h1>
-            </div>
-            <div class="skillcard">
-              <center><img src="./images/data analysis.png" alt
-                  width="80px"></center>
-              <h1 class="Data">Data Analysis</h1>
-            </div>
-            <div class="skillcard">
-              <center> <img src="./images/mapel icon.png" alt
-                  width="65px"></center>
-              <h1 class="mapel">Mapel language</h1>
-            </div>
-            <div class="skillcard">
-              <center><img src="./images/html.png" alt
-                  width="67px"></center>
-              <h1 class="html">HTML Coding</h1>
-            </div>
-            <div class="skillcard">
-              <center><img src="./images/books.png" alt width="70px"></center>
-              <h1 class="reading"> Reading Books</h1>
-            </div>
-          </div>
-
         </div>
 
-        <!-- project section start -->
-        <div class="project" id="Projects">
-          <div id="Heading">
-            <center><h2 id="Heading">Projects:</h2>
-            </center>
-            <div class="line2"></div>
-
-            <div class="projectcontent">
-              <div class="projectcard">
-                <div class="cardpic">
-                  <img src="./images/pic mape.png" alt>
+        <div class="highlights-section">
+            <div class="glass-card highlight-card">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3><i class="fas fa-cogs"></i> Technical Expertise</h3>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-file-alt"></i> MS Office Suite</li>
+                        <li><i class="fas fa-database"></i> Power Query</li>
+                        <li><i class="fas fa-chart-bar"></i> Dashboard Creation</li>
+                    </ul>
+                    <a href="skills.html" class="btn btn-text">Explore Skills <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="cardcontent">
-                  <p>Project 01</p>
-                  <p id="description">Maple is a computer algebra system used
-                    for mathematics, engineering, and scientific calculations.
-                    It helps solve equations, perform symbolic and numeric
-                    computations, and create visualizations.</p>
-                  <div class="detail"><button>View</button></div>
-                </div>
-              </div>
-
-              <div class="projectcard">
-                <div class="cardpic">
-                  <img src="./images/data gathering.jpg" alt>
-                </div>
-                <div class="cardcontent">
-                  <p>Project 02</p>
-                  <p id="description">Analyzed one year of retail sales data to
-                    identify top-selling products, seasonal trends, and customer
-                    buying patterns. Cleaned and organized the dataset using
-                    Excel tools to visualize data.</p>
-                  <div class="detail"><button>View</button></div>
-
-                </div>
-
-              </div>
-
-              <div class="projectcard">
-
-                <div class="cardpic">
-                  <img src="./images/images.jpg" alt>
-                </div>
-                <div class="cardcontent">
-                  <p>Project 03</p>
-                  <p id="description">CSS is a styling language used to design
-                    and format web pages. It controls colors, fonts, layouts,
-                    and overall visual appearance. CSS works with HTML to make
-                    websites look attractive and user-friendly.
-
-                  </p>
-                  <div class="detail"><button>View</button></div>
-                </div>
-              </div>
-
             </div>
 
-          </div>
-
+            <div class="glass-card highlight-card">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3><i class="fas fa-award"></i> Academic Excellence</h3>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-square-root-alt"></i> BS Mathematics</li>
+                        <li><i class="fas fa-star"></i> CGPA: 3.74/4.00</li>
+                        <li><i class="fas fa-microscope"></i> Research-Oriented</li>
+                    </ul>
+                    <a href="about.html" class="btn btn-text">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
         </div>
-
-        <!-- project section start -->
-        <div class="project2">
-          <center> <div class="Heading">Project # 2</div></center>
-          <div class="line3"></div>
-          <div class="carddesign">
-            <div class="card1">
-              <div class="cardpic2">
-                <center><img src="./images/mapel icon.png" alt
-                    width="100px"></center>
-              </div>
-              <div class="procontent"> Maple Language is a high-level
-                programming
-                language used mainly for mathematics, engineering, and
-                scientific
-                computing. It is part of the Maple software, which allows users
-                to
-                perform symbolic algebra, numerical calculations and create
-                interactive applications.</div>
-
-            </div>
-            <div class="card1">
-              <div class="cardpic2">
-                <center><img src="./images/data gathering.jpg" id="csss"
-                    width="250px"></center>
-              </div>
-              <div class="procontent"> Data Gathering in Data Analysis is the
-                process of collecting relevant information from various
-                sources—such as surveys, sensors, or databases—to answer a
-                research question or solve a problem. The goal is to ensure the
-                data is accurate, complete, and suitable for analysis.</div>
-
-            </div>
-
-          </div>
-
-        </div>
-        <div class="contact" id="Contact">
-
-          <div class=identity>
-            <center> <div class="message"> Send us a message </div></center>
-            <div class="inputfields">
-            <label for="name"> Name: </label>
-            <input type="text" required>
-            </div>
-            <div class="inputfields">
-            <label for="email"> Email: </label>
-            <input type="email" required>
-            </div>
-            <div class="inputfields">
-            <label for> Subjects:</label>
-            <input type="text" required> 
-            </div>
-            <div class="inputfields">
-            <label for="message"> Message:</label>
-            <input type="text" required> </div>
-
-            <button> Send message</button>
-          </div>
-          <div class="Phone">
-            <div class="Us"> <h2 class="firstline">Contact Us           <div class="line4"></div>
-</h2>
-              <p id="paragragh">We'are open for any sugesstion or just to have a
-                 chat</p><br><br>
-              <p id="address"> <i class="fa-solid fa-location-dot"></i>  Address:</p> <p id="Address">Zikriya Town Street
-                no 41  Multan</p> <br><br>
-              <p id="address"><i class="fa-solid fa-phone"></i>  Phone:</p> <p id="Address">1234567888
-                </p> <br><br>
-              <p id="address"> <i class="fa-solid fa-location-arrow"></i>  Email: </p> <p id="Address"> MuqadasZainaB123@gmail.com</p> <br><br>
-              <p id="address"> <i class="fa-solid fa-right-to-bracket"></i>   Website:</p> <p id="Address">youtube.com</p> <br><br>
-
-
-            </div>
-          </div>
-
-        </div>
-
-        <footer class="footer">
-    <div class="footer-column">
-      <h3>Company</h3>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Our Services</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Affiliate Program</a></li>
-      </ul>
     </div>
-    <div class="footer-column">
-      <h3>Get Help</h3>
-      <ul>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Shipping</a></li>
-        <li><a href="#">Returns</a></li>
-        <li><a href="#">Order Status</a></li>
-        <li><a href="#">Payment Options</a></li>
-      </ul>
-    </div>
-    <div class="footer-column">
-      <h3>Online Shop</h3>
-      <ul>
-        <li><a href="#">Watch</a></li>
-        <li><a href="#">Bag</a></li>
-        <li><a href="#">Shoes</a></li>
-        <li><a href="#">Dress</a></li>
-      </ul>
-    </div>
-    <div class="footer-column">
-      <h3>Follow Us</h3>
-      <div class="social-icons">
-        <a href="#">f</a>
-        <a href="#">t</a>
-        <a href="#">i</a>
-      </div>
-    </div>
-  </footer>
-
-      </div>
-    </body>
-  </html>
+</body>
+</html>
