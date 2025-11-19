@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Time Table</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Neon Gradient Background */
+        body {
+            background: linear-gradient(135deg, #0d0016 0%, #000000 100%);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            color: #ecf0f1;
+            padding: 20px;
+        }
+
+        /* Custom Neon Glow Effect for Cards/Text */
+        .neon-glow {
+            box-shadow: 
+                0 0 5px rgba(109, 40, 217, 0.7), /* Purple light */
+                0 0 12px rgba(59, 130, 246, 0.5); /* Blue haze */
+            border: 1px solid rgba(109, 40, 217, 0.4);
+            transition: all 0.3s ease;
+        }
+        .neon-glow:hover {
+            box-shadow: 
+                0 0 8px rgba(109, 40, 217, 1), 
+                0 0 20px rgba(59, 130, 246, 0.8),
+                0 0 30px rgba(236, 72, 153, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .neon-text {
+            color: #e0f2fe; /* Lightest blue for main text */
+            text-shadow: 0 0 10px #a78bfa, 0 0 20px #6d28d9; /* Deep purple glow */
+        }
+
+        /* Color themes for focused study blocks */
+        .focus-ai {
+             background-color: #be185d; /* Deep Rose/Pink for AI */
+        }
+        .focus-web {
+            background-color: #059669; /* Deep Green for Web Dev */
+        }
+        .focus-dotnet {
+            background-color: #1d4ed8; /* Deep Blue for .NET */
+        }
+        /* Non-study blocks */
+        .uni-time {
+            background-color: #374151; /* Darker Gray for Uni/Fixed time */
+        }
+        .rest-time {
+            background-color: #1f2937; /* Dark Gray for Breaks */
+        }
+        .study-free {
+            background-color: #4b5563; /* Mid-gray for flexible study */
+        }
+        .sleep-time {
+            background-color: #ef4444; /* Bright Red for Sleep WARNING */
+            color: #111827;
+            font-weight: bold;
+            text-shadow: none;
+        }
+        /* Custom colors for the Timetable Grid */
+        .period-nimaz { background-color: #6366f1; } /* Indigo */
+        .period-breakfast { background-color: #f59e0b; } /* Amber */
+        .period-lunch { background-color: #f97316; } /* Orange */
+        .period-uni { background-color: #475569; } /* Slate */
+        .period-dinner { background-color: #ef4444; } /* Red */
+        .period-study-late { background-color: #3b82f6; } /* Blue */
+        .period-slip { background-color: #06b6d4; } /* Cyan for Slip/Nap */
+
+        /* Specialized focus colors for the grid */
+        .period-ai { background-color: #be185d; } /* AI Pink */
+        .period-web { background-color: #059669; } /* Web Green */
+        .period-dotnet { background-color: #1d4ed8; } /* .NET Blue */
+        .period-revision { background-color: #8b5cf6; } /* Revision Purple */
+
+        .active-tab {
+            background-color: #6d28d9; /* Primary Purple */
+            color: white;
+            box-shadow: 0 0 15px #a78bfa;
+        }
+        .tab-button {
+             border: 2px solid transparent;
+             white-space: nowrap; /* Prevent wrapping in tabs */
+        }
+        .tab-button:not(.active-tab) {
+            border-color: #4b5563; /* Subtle border for inactive tabs */
+        }
+        /* Make the table scrollable for the period structure */
+        .weekday-table {
+            min-width: 1400px; /* Increased width for new column */
+            border-collapse: separate;
+            border-spacing: 2px; /* Small space between cells */
+        }
+        .weekday-table th, .weekday-table td {
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            border-radius: 8px; /* Rounded cells */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="max-w-4xl mx-auto p-4 rounded-xl">
+        <h1 class="text-5xl font-extrabold text-center mb-4 neon-text">
+            ⚡ Daily View Timetable ⚡
+        </h1>
+        <p class="text-center mb-6 text-lg text-red-400 font-bold">
+            ***CRITICAL: Weekday sleep remains at 4.5 hours (12:00 AM - 4:30 AM).***
+        </p>
+
+        <!-- Tabs Navigation -->
+        <div class="mb-4">
+            <h2 class="text-2xl font-bold neon-text mb-3">Daily View</h2>
+            <div id="tabs" class="flex flex-wrap space-x-2 overflow-x-auto pb-2">
+                <button class="tab-button active-tab p-3 rounded-xl font-bold transition duration-300 text-sm sm:text-base" data-tab="show-all">Show All (Mon-Fri)</button>
+                <button class="tab-button p-3 rounded-xl font-bold transition duration-300 text-sm sm:text-base bg-gray-700 hover:bg-gray-600" data-tab="sat">Saturday</button>
+                <button class="tab-button p-3 rounded-xl font-bold transition duration-300 text-sm sm:text-base bg-gray-700 hover:bg-gray-600" data-tab="sun">Sunday</button>
+                <button class="tab-button p-3 rounded-xl font-bold transition duration-300 text-sm sm:text-base bg-gray-700 hover:bg-gray-600" data-tab="analysis">Analysis</button>
+            </div>
+        </div>
+
+        <!-- Tab Content Containers -->
+        <div id="tab-content">
+            
+            <!-- 1. FULL WEEKDAY GRID (SHOW ALL) - NEW TIMETABLE STRUCTURE -->
+            <div id="show-all" class="tab-pane">
+                <h3 class="text-3xl font-bold mb-4 neon-text text-center">Weekday (Mon-Fri) Period Grid - Focused Study Rotation + Power Nap</h3>
+                <div class="shadow-xl rounded-xl neon-glow overflow-x-auto p-2 bg-gray-900">
+                    <table class="weekday-table w-full text-xs sm:text-sm text-left text-gray-200">
+                        <thead>
+                            <tr class="text-xs text-white uppercase font-extrabold bg-gray-800">
+                                <th scope="col" class="py-3 px-2 w-[8%]">Day/Period</th>
+                                <th scope="col" class="w-[10%]">I<br>4:30-5:20</th>
+                                <th scope="col" class="w-[11%]">II<br>5:20-7:00</th>
+                                <th scope="col" class="w-[9%]">III<br>7:00-8:00</th>
+                                <th scope="col" class="w-[13%]">IV<br>8:00-11:00</th>
+                                <th scope="col" class="w-[10%]">V<br>11:00-1:00</th> <!-- NEW SLIP PERIOD -->
+                                <th scope="col" class="w-[10%]">VI<br>1:00-1:50</th>
+                                <th scope="col" class="w-[18%]">VII<br>1:50-10:00</th>
+                                <th scope="col" class="w-[10%]">VIII<br>10:00-10:30</th>
+                                <th scope="col" class="w-[11%]">IX<br>10:30-12:00</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Monday: AI Focus -->
+                            <tr class="font-bold">
+                                <td class="bg-gray-700 rounded-lg">Monday</td>
+                                <td class="period-nimaz">Nimaz</td>
+                                <td class="period-ai">AI Fundamentals</td>
+                                <td class="period-breakfast">Breakfast</td>
+                                <td class="period-ai">Deep AI Project (3 Hrs)</td>
+                                <td class="period-slip">Sleep-time (2 Hrs)</td>
+                                <td class="period-lunch">Lunch</td>
+                                <td class="period-uni">University Time</td>
+                                <td class="period-dinner">Dinner</td>
+                                <td class="period-revision">Jaan Ka time</td>
+                            </tr>
+                            <!-- Tuesday: Web Dev Focus -->
+                            <tr class="font-bold">
+                                <td class="bg-gray-700 rounded-lg">Tuesday</td>
+                                <td class="period-nimaz">Nimaz</td>
+                                <td class="period-web">Web Fundamentals</td>
+                                <td class="period-breakfast">Breakfast</td>
+                                <td class="period-web">Deep Web Project (3 Hrs)</td>
+                                <td class="period-slip">Sleep-time (2 Hrs)</td>
+                                <td class="period-lunch">Lunch</td>
+                                <td class="period-uni">University Time</td>
+                                <td class="period-dinner">Dinner</td>
+                                <td class="period-revision">Jaan Ka time</td>
+                            </tr>
+                            <!-- Wednesday: .NET Focus -->
+                            <tr class="font-bold">
+                                <td class="bg-gray-700 rounded-lg">Wednesday</td>
+                                <td class="period-nimaz">Nimaz</td>
+                                <td class="period-dotnet">.NET Fundamentals</td>
+                                <td class="period-breakfast">Breakfast</td>
+                                <td class="period-dotnet">Deep .NET Project (3 Hrs)</td>
+                                <td class="period-slip">Sleep-time (2 Hrs)</td>
+                                <td class="period-lunch">Lunch</td>
+                                <td class="period-uni">University Time</td>
+                                <td class="period-dinner">Dinner</td>
+                                <td class="period-revision">Jaan Ka time</td>
+                            </tr>
+                            <!-- Thursday: AI Focus -->
+                            <tr class="font-bold">
+                                <td class="bg-gray-700 rounded-lg">Thursday</td>
+                                <td class="period-nimaz">Nimaz</td>
+                                <td class="period-ai">AI Fundamentals</td>
+                                <td class="period-breakfast">Breakfast</td>
+                                <td class="period-ai">Deep AI Project (3 Hrs)</td>
+                                <td class="period-slip">Sleep-time (2 Hrs)</td>
+                                <td class="period-lunch">Lunch</td>
+                                <td class="period-uni">University Time</td>
+                                <td class="period-dinner">Dinner</td>
+                                <td class="period-revision">Jaan Ka time</td>
+                            </tr>
+                            <!-- Friday: Web Dev Focus -->
+                            <tr class="font-bold">
+                                <td class="bg-gray-700 rounded-lg">Friday</td>
+                                <td class="period-nimaz">Nimaz</td>
+                                <td class="period-web">Web Fundamentals</td>
+                                <td class="period-breakfast">Breakfast</td>
+                                <td class="period-web">Deep Web Project (3 Hrs)</td>
+                                <td class="period-slip">Sleep-time (2 Hrs)</td>
+                                <td class="period-lunch">Lunch</td>
+                                <td class="period-uni">University Time</td>
+                                <td class="period-dinner">Dinner</td>
+                                <td class="period-revision">Jaan Ka time</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Sleep Row remains separate as it's outside the daily flow -->
+                <div class="mt-4 p-3 text-center sleep-time rounded-xl neon-glow">
+                    **DAILY OVERNIGHT SLEEP:** 12:00 AM - 4:30 AM (4 Hours 30 min)
+                </div>
+            </div>
+
+            
+            <!-- 2. SATURDAY SCHEDULE (KEPT AS DETAILED LIST) -->
+            <div id="sat" class="tab-pane hidden">
+                <h3 class="text-3xl font-bold mb-4 neon-text text-center">Saturday: AI & Project Deep Dive (8 Hrs Dedicated Study)</h3>
+                <div class="grid grid-cols-6 text-xs sm:text-base gap-2 mb-12">
+                    <div class="col-span-1 p-3 font-bold bg-gray-700 rounded-tl-lg text-center">Time</div>
+                    <div class="col-span-5 p-3 font-bold bg-gray-700 rounded-tr-lg text-center">Activity (Saturday)</div>
+                    
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">04:30 - 05:30</div>
+                    <div class="col-span-5 p-3 text-center rest-time rounded-lg">Wake Up / Nimaz / Breakfast (1 hr)</div>
+
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">09:00 - 01:00</div>
+                    <div class="col-span-5 p-3 text-center focus-ai rounded-lg neon-glow">
+                        **Deep AI Work (4 hrs):** Implement a model or complete a complex course module.
+                    </div>
+
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">01:00 - 02:00</div>
+                    <div class="col-span-5 p-3 text-center rest-time rounded-lg">Lunch & Rest (1 hr)</div>
+
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">02:00 - 06:00</div>
+                    <div class="col-span-5 p-3 text-center focus-web rounded-lg neon-glow">
+                        **Web Dev Project Work (4 hrs):** Focus on building a large feature (e.g., React component or backend API).
+                    </div>
+
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">06:00 - 10:00</div>
+                    <div class="col-span-5 p-3 text-center rest-time rounded-lg">Free Time / Social / Exercise (4 hrs)</div>
+                    
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800 rounded-bl-lg">10:00 - 12:00 AM</div>
+                    <div class="col-span-5 p-3 text-center focus-dotnet rounded-lg neon-glow rounded-br-lg">
+                        **.NET Practice (2 hrs):** Review advanced C# topics or work on database integration.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3. SUNDAY SCHEDULE (KEPT AS DETAILED LIST) -->
+            <div id="sun" class="tab-pane hidden">
+                <h3 class="text-3xl font-bold mb-4 neon-text text-center">Sunday: Review & Prep Day (6.5 Hrs Dedicated Study)</h3>
+                <div class="grid grid-cols-6 text-xs sm:text-base gap-2 mb-12">
+                    <div class="col-span-1 p-3 font-bold bg-gray-700 rounded-tl-lg text-center">Time</div>
+                    <div class="col-span-5 p-3 font-bold bg-gray-700 rounded-tr-lg text-center">Activity (Sunday)</div>
+
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">04:30 - 05:30</div>
+                    <div class="col-span-5 p-3 text-center rest-time rounded-lg">Wake Up / Nimaz / Breakfast (1 hr)</div>
+                    
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">09:00 - 12:30</div>
+                    <div class="col-span-5 p-3 text-center uni-time rounded-lg neon-glow">
+                        **University Catch-up (3.5 hrs):** Review lecture notes, complete homework, or prep readings for the upcoming week.
+                    </div>
+
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">12:30 - 01:30</div>
+                    <div class="col-span-5 p-3 text-center rest-time rounded-lg">Lunch & Rest (1 hr)</div>
+
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800">01:30 - 05:00</div>
+                    <div class="col-span-5 p-3 text-center focus-dotnet rounded-lg neon-glow">
+                        **Structured Learning / .NET (3.5 hrs):** Take an online assessment, work on documentation, or learn Git/DevOps concepts.
+                    </div>
+
+                    <div class="col-span-1 p-3 text-center font-semibold bg-gray-800 rounded-bl-lg">05:00 - 12:00 AM</div>
+                    <div class="col-span-5 p-3 text-center rest-time rounded-br-lg">Dinner & Prepare for Monday / Free Time (7 hr 0 min)</div>
+                </div>
+            </div>
+
+            <!-- 4. WEEKLY ANALYSIS -->
+            <div id="analysis" class="tab-pane hidden">
+                <h3 class="text-3xl font-bold mb-4 neon-text text-center">Weekly Study Hour Analysis (Total Hours)</h3>
+                <div class="p-6 bg-gray-900 rounded-xl neon-glow">
+                    <div class="mt-8 text-center">
+                        <h4 class="text-2xl font-bold neon-text">
+                            Total Focused Weekday Study Time: <span class="text-green-400">30.8 Hours</span> (6.16 hrs/day)
+                        </h4>
+                        <h4 class="text-2xl font-bold neon-text mt-4">
+                            Total Structured Weekend Study Time: <span class="text-purple-400">10.5 Hours</span> (Sat-Sun)
+                        </h4>
+                        <h4 class="text-3xl font-bold neon-text mt-6">
+                            Total Time Dedicated to Self-Improvement: <span class="text-yellow-400">41.3 Hours / Week</span>
+                        </h4>
+                        <p class="text-gray-400 mt-2">
+                            This includes 8 hours of dedicated time for a crucial **2-hour nap (11am-1pm)** every weekday.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabsContainer = document.getElementById('tabs');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            // Function to show the selected tab
+            function showTab(tabId) {
+                // Hide all panes
+                tabPanes.forEach(pane => {
+                    pane.classList.add('hidden');
+                });
+                
+                // Remove active class from all buttons
+                tabButtons.forEach(button => {
+                    button.classList.remove('active-tab');
+                    button.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                });
+
+                // Show the selected pane
+                const activePane = document.getElementById(tabId);
+                if (activePane) {
+                    activePane.classList.remove('hidden');
+                } 
+
+                // Set the active button style
+                const activeButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active-tab');
+                    activeButton.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                }
+            }
+
+            // Event listener for tab buttons
+            tabsContainer.addEventListener('click', (event) => {
+                const button = event.target.closest('.tab-button');
+                if (button) {
+                    const tabId = button.getAttribute('data-tab');
+                    showTab(tabId);
+                }
+            });
+
+            // Initialize: Show 'Show All' schedule on load
+            showTab('show-all'); 
+        });
+    </script>
+
+</body>
+</html>
